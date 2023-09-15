@@ -14,7 +14,7 @@ node {
                 catchError(buildResult: 'SUCCESS', stageResult: 'FAILURE') {
                    // for prod or no showcase the project: use:  variable: 'GITHUB_TOKEN'   is recommended
                    //asswordVariable: 'GIT_PASSWORD', usernameVariable: 'GIT_USERNAME'
-                    withCredentials([usernamePassword(credentialsId: 'github',    variable: 'GITHUB_TOKEN' )]) {
+                    withCredentials([usernamePassword(credentialsId: 'github', asswordVariable: 'GIT_PASSWORD', usernameVariable: 'GIT_USERNAME' )]) {
                         //def encodedPassword = URLEncoder.encode("$GIT_PASSWORD",'UTF-8')
                         sh "git config user.email arthus8ni@gmail.com"
                         sh "git config user.name Arthus"
@@ -24,7 +24,8 @@ node {
                         sh "cat deployment.yaml"
                         sh "git add ."
                         sh "git commit -m 'Done by Jenkins Job changemanifest: ${env.BUILD_NUMBER}'"
-                        sh "git push https://${GITHUB_TOKEN}@github.com/Tusartus/aks-flaskmanifestargocd.git HEAD:main"
+                        //sh "git push https://${GITHUB_TOKEN}@github.com/Tusartus/aks-flaskmanifestargocd.git HEAD:main"
+                         sh "git push https://${GIT_USERNAME}:${GIT_PASSWORD}@github.com/${GIT_USERNAME}/kubernetesmanifest.git HEAD:main"
                      }
                  }
              }
