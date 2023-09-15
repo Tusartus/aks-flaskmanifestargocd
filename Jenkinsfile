@@ -8,8 +8,6 @@ node {
     }
 
     stage('Update GIT') {
-       
-      steps{
             script {
                 catchError(buildResult: 'SUCCESS', stageResult: 'FAILURE') {
                    // for prod or no showcase the project: use:  variable: 'GITHUB_TOKEN'   is recommended
@@ -28,8 +26,8 @@ node {
                          sh "git push https://${GIT_USERNAME}:${GIT_PASSWORD}@github.com/${GIT_USERNAME}/kubernetesmanifest.git HEAD:main"
                      }
                  }
-             }
-       }
+             
+            }
 
     }
 
